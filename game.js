@@ -19,12 +19,22 @@ function setCanvasSize(){
     startGame();
 }
 
+function normalizeMap(map){
+    let mapNormalized = map.trim().replaceAll(" ", "").split('\n');
+    mapNormalized = mapNormalized.map(row => row.split(''));
+    return mapNormalized;
+}
+
 function startGame(){
     game.font = `${elementsSize}px Verdana`;
     game.textAlign = '';
-    for (let i = 0; i < 10; i++){
-        for (let j = 1; j <= 10; j++){
-            game.fillText(emojis['X'], elementsSize * i, elementsSize * j);
+
+    const map = normalizeMap(maps[0]);
+    console.log(map);
+
+    for (let row = 1; row <= 10; row++){
+        for (let col = 0; col < 10; col++){
+            game.fillText(emojis[map[row-1][col]], elementsSize * col, elementsSize * row);
         }
     }
 }
